@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Eleve } from './interfaces/eleve.interface';
+import { createEleveDto } from './dto/create-eleve.dto';
 
 @Injectable()
 export class EleveService {
@@ -47,7 +48,7 @@ export class EleveService {
       return { Message: 'Donnee innexistante' };
     }
   }
-  CreateOne(eleve: Eleve) {
+  CreateOne(eleve: createEleveDto) {
     const newE: Eleve = {
       id: this.eleves.length + 1,
       nom: eleve.nom,
@@ -61,7 +62,7 @@ export class EleveService {
       message: 'Donnee enregistré  :  Operation effectué avec succes',
     };
   }
-  updateOne(id: string, eleve: Eleve) {
+  updateOne(id: string, eleve: Partial<createEleveDto>) {
     const update = this.eleves.find((item) => item.id == +id);
     if (!update) {
       return new NotFoundException();
@@ -84,8 +85,8 @@ export class EleveService {
     this.eleves = [...updateEleves];
     console.log(update);
     const upd = {
-      count: '1',
-      eleve: 'update',
+      count: 1,
+      eleve: update,
       message: 'Donnée modifiée :  Operation effectué avec succes',
     };
     return upd;

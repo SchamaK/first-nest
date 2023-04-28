@@ -16,15 +16,15 @@ export class EleveController {
   }
   @Post('/create')
   CreateOne(@Body() newEleve: createEleveDto): any {
-    this.eleveService.CreateOne(newEleve);
+    return this.eleveService.CreateOne(newEleve);
   }
   @Post('/delete/:id')
   DeleteOne(@Param('id') id: string): any {
-    this.eleveService.DeleteOne(id);
+    return this.eleveService.DeleteOne(id);
   }
   @Post('/update/:id')
   UpdateOne(@Param('id') id: string, @Body() updateEleve: createEleveDto): any {
     console.log(updateEleve);
-    this.eleveService.updateOne(id, updateEleve);
+    return this.eleveService.updateOne(id, updateEleve);
   }
 }
